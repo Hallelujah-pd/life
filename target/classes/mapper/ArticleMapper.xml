@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.life.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.school.life.bean.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_time" jdbcType="TIMESTAMP" property="articleTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+    <result column="article_click" jdbcType="INTEGER" property="articleClick" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_img" jdbcType="VARCHAR" property="articleImg" />
+  </resultMap>
+  <resultMap id="WithUserResultMap" type="com.school.life.bean.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_time" jdbcType="TIMESTAMP" property="articleTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+    <result column="article_click" jdbcType="INTEGER" property="articleClick" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_img" jdbcType="VARCHAR" property="articleImg" />
+    <result column="user_id" property="userId"/>
+
+    <association property="user" javaType="com.school.life.bean.User">
+      <id column="user_id" property="userId"/>
+      <result column="real_name" property="realName"/>
+      <result column="self_introduction" property="selfIntroduction"/>
+      <result column="head_img" property="headImg"/>
+      <result column="username" property="username"/>
+      <result column="relation" property="relation"/>
+      <result column="reason" property="reason"/>
+      <result column="email" property="email"/>
+      <result column="user_password" property="userPassword"/>
+    </association>
+  </resultMap>
+
+  <sql id="WithUser_Column_List">
+    u.user_id, u.real_name, u.self_introduction, u.head_img, u.username, u.relation, u.reason, u.email, u.user_password,
+    a.article_id, a.article_time, a.user_id, a.article_content, a.article_click, a.article_title,
+    a.article_img
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    article_id, article_time, user_id, article_content, article_click, article_title, 
+    article_img
+  </sql>
+  <select id="selectByExample" parameterType="com.school.life.bean.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.school.life.bean.ArticleExample">
+    delete from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.school.life.bean.Article">
+    insert into article (article_id, article_time, user_id, 
+      article_content, article_click, article_title, 
+      article_img)
+    values (#{articleId,jdbcType=INTEGER}, #{articleTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{articleContent,jdbcType=VARCHAR}, #{articleClick,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articleImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.school.life.bean.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="articleTime != null">
+        article_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+      <if test="articleClick != null">
+        article_click,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleImg != null">
+        article_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleTime != null">
+        #{articleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleClick != null">
+        #{articleClick,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImg != null">
+        #{articleImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.school.life.bean.ArticleExample" resultType="java.lang.Long">
+    select count(*) from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <select id="selectByExampleWithUser" resultMap="WithUserResultMap" parameterType="com.school.life.bean.ArticleExample">
+      select
+      <if test="distinct">
+        distinct
+      </if>
+      <include refid="WithUser_Column_List" />
+      FROM article a
+      left join user u on a.`user_id`=u.`user_id`
+      <if test="_parameter != null">
+        <include refid="Example_Where_Clause" />
+      </if>
+      <if test="orderByClause != null">
+        order by ${orderByClause}
+      </if>
+    </select>
+    <select id="selectByExampleWithUserOrderByTime" resultMap="WithUserResultMap">
+      select *  FROM article a
+                       left join user u on a.`user_id`=u.`user_id` order by a.`article_time` DESC
+    </select>
+    <select id="selectByPrimaryKeyWithUser" resultMap="WithUserResultMap">
+      select
+      <include refid="WithUser_Column_List" />
+      from article a
+      left join user u on a.`user_id`=u.`user_id`
+      where article_id = #{articleId,jdbcType=INTEGER}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+    update article
+    <set>
+      <if test="record.articleId != null">
+        article_id = #{record.articleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleTime != null">
+        article_time = #{record.articleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleContent != null">
+        article_content = #{record.articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleClick != null">
+        article_click = #{record.articleClick,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleTitle != null">
+        article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleImg != null">
+        article_img = #{record.articleImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update article
+    set article_id = #{record.articleId,jdbcType=INTEGER},
+      article_time = #{record.articleTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      article_content = #{record.articleContent,jdbcType=VARCHAR},
+      article_click = #{record.articleClick,jdbcType=INTEGER},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      article_img = #{record.articleImg,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.school.life.bean.Article">
+    update article
+    <set>
+      <if test="articleTime != null">
+        article_time = #{articleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleClick != null">
+        article_click = #{articleClick,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImg != null">
+        article_img = #{articleImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.school.life.bean.Article">
+    update article
+    set article_time = #{articleTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=VARCHAR},
+      article_click = #{articleClick,jdbcType=INTEGER},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_img = #{articleImg,jdbcType=VARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>
