@@ -29,4 +29,10 @@ public class BlogServiceTest {
         List<Article> articleList = blogService.getArticleList();
         articleList.forEach(System.out::println);
     }
+
+    @Test
+    public void getArticleByUserId() {
+        List<Article> articleByUserId = blogService.getArticleByUserId(1);
+        articleByUserId.forEach(System.out::println);
+    }
 }

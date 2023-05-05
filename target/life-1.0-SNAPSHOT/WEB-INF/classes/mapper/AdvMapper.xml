@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.life.dao.AdvMapper">
+  <resultMap id="BaseResultMap" type="com.school.life.bean.Adv">
+    <id column="adv_id" jdbcType="INTEGER" property="advId" />
+    <result column="adv_time" jdbcType="TIMESTAMP" property="advTime" />
+    <result column="adv_img" jdbcType="VARCHAR" property="advImg" />
+    <result column="adv_content" jdbcType="VARCHAR" property="advContent" />
+    <result column="adv_head" jdbcType="VARCHAR" property="advHead" />
+    <result column="adv_addtime" jdbcType="VARCHAR" property="advAddtime" />
+    <result column="adv_order" jdbcType="VARCHAR" property="advOrder" />
+    <result column="adv_location" jdbcType="VARCHAR" property="advLocation" />
+    <result column="adv_pageLocal" jdbcType="VARCHAR" property="advPagelocal" />
+    <result column="adv_click" jdbcType="INTEGER" property="advClick" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    adv_id, adv_time, adv_img, adv_content, adv_head, adv_addtime, adv_order, adv_location, 
+    adv_pageLocal, adv_click
+  </sql>
+  <select id="selectByExample" parameterType="com.school.life.bean.AdvExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from adv
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from adv
+    where adv_id = #{advId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adv
+    where adv_id = #{advId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.school.life.bean.AdvExample">
+    delete from adv
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.school.life.bean.Adv" useGeneratedKeys="true" keyProperty="advId">
+
+    insert into adv (adv_id, adv_time, adv_img, 
+      adv_content, adv_head, adv_addtime, 
+      adv_order, adv_location, adv_pageLocal, 
+      adv_click)
+    values (#{advId,jdbcType=INTEGER}, #{advTime,jdbcType=TIMESTAMP}, #{advImg,jdbcType=VARCHAR}, 
+      #{advContent,jdbcType=INTEGER}, #{advHead,jdbcType=VARCHAR}, #{advAddtime,jdbcType=VARCHAR},
+      #{advOrder,jdbcType=VARCHAR}, #{advLocation,jdbcType=VARCHAR}, #{advPagelocal,jdbcType=VARCHAR}, 
+      #{advClick,jdbcType=INTEGER})
+
+  </insert>
+  <insert id="insertSelective" parameterType="com.school.life.bean.Adv">
+    insert into adv
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="advId != null">
+        adv_id,
+      </if>
+      <if test="advTime != null">
+        adv_time,
+      </if>
+      <if test="advImg != null">
+        adv_img,
+      </if>
+      <if test="advContent != null">
+        adv_content,
+      </if>
+      <if test="advHead != null">
+        adv_head,
+      </if>
+      <if test="advAddtime != null">
+        adv_addtime,
+      </if>
+      <if test="advOrder != null">
+        adv_order,
+      </if>
+      <if test="advLocation != null">
+        adv_location,
+      </if>
+      <if test="advPagelocal != null">
+        adv_pageLocal,
+      </if>
+      <if test="advClick != null">
+        adv_click,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="advId != null">
+        #{advId,jdbcType=INTEGER},
+      </if>
+      <if test="advTime != null">
+        #{advTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="advImg != null">
+        #{advImg,jdbcType=VARCHAR},
+      </if>
+      <if test="advContent != null">
+        #{advContent,jdbcType=VARCHAR},
+      </if>
+      <if test="advHead != null">
+        #{advHead,jdbcType=VARCHAR},
+      </if>
+      <if test="advAddtime != null">
+        #{advAddtime,jdbcType=VARCHAR},
+      </if>
+      <if test="advOrder != null">
+        #{advOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="advLocation != null">
+        #{advLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="advPagelocal != null">
+        #{advPagelocal,jdbcType=VARCHAR},
+      </if>
+      <if test="advClick != null">
+        #{advClick,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.school.life.bean.AdvExample" resultType="java.lang.Long">
+    select count(*) from adv
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <select id="selectByAdvLocalAndAdvPageLocal" resultMap="BaseResultMap">
+    select * from adv where adv_location = #{advLocation,jdbcType=VARCHAR} and adv_pageLocal = #{advPagelocal,jdbcType=VARCHAR}
+
+    </select>
+  <select id="selectByOrderClick" resultMap="BaseResultMap">
+    select *
+    from adv
+    order by adv_click DESC;
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update adv
+    <set>
+      <if test="record.advId != null">
+        adv_id = #{record.advId,jdbcType=INTEGER},
+      </if>
+      <if test="record.advTime != null">
+        adv_time = #{record.advTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.advImg != null">
+        adv_img = #{record.advImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advContent != null">
+        adv_content = #{record.advContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advHead != null">
+        adv_head = #{record.advHead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advAddtime != null">
+        adv_addtime = #{record.advAddtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advOrder != null">
+        adv_order = #{record.advOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advLocation != null">
+        adv_location = #{record.advLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advPagelocal != null">
+        adv_pageLocal = #{record.advPagelocal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advClick != null">
+        adv_click = #{record.advClick,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update adv
+    set adv_id = #{record.advId,jdbcType=INTEGER},
+      adv_time = #{record.advTime,jdbcType=TIMESTAMP},
+      adv_img = #{record.advImg,jdbcType=VARCHAR},
+      adv_content = #{record.advContent,jdbcType=VARCHAR},
+      adv_head = #{record.advHead,jdbcType=VARCHAR},
+      adv_addtime = #{record.advAddtime,jdbcType=VARCHAR},
+      adv_order = #{record.advOrder,jdbcType=VARCHAR},
+      adv_location = #{record.advLocation,jdbcType=VARCHAR},
+      adv_pageLocal = #{record.advPagelocal,jdbcType=VARCHAR},
+      adv_click = #{record.advClick,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.school.life.bean.Adv">
+    update adv
+    <set>
+      <if test="advTime != null">
+        adv_time = #{advTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="advImg != null">
+        adv_img = #{advImg,jdbcType=VARCHAR},
+      </if>
+      <if test="advContent != null">
+        adv_content = #{advContent,jdbcType=VARCHAR},
+      </if>
+      <if test="advHead != null">
+        adv_head = #{advHead,jdbcType=VARCHAR},
+      </if>
+      <if test="advAddtime != null">
+        adv_addtime = #{advAddtime,jdbcType=VARCHAR},
+      </if>
+      <if test="advOrder != null">
+        adv_order = #{advOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="advLocation != null">
+        adv_location = #{advLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="advPagelocal != null">
+        adv_pageLocal = #{advPagelocal,jdbcType=VARCHAR},
+      </if>
+      <if test="advClick != null">
+        adv_click = #{advClick,jdbcType=INTEGER},
+      </if>
+    </set>
+    where adv_id = #{advId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.school.life.bean.Adv">
+    update adv
+    set adv_time = #{advTime,jdbcType=TIMESTAMP},
+      adv_img = #{advImg,jdbcType=VARCHAR},
+      adv_content = #{advContent,jdbcType=VARCHAR},
+      adv_head = #{advHead,jdbcType=VARCHAR},
+      adv_addtime = #{advAddtime,jdbcType=VARCHAR},
+      adv_order = #{advOrder,jdbcType=VARCHAR},
+      adv_location = #{advLocation,jdbcType=VARCHAR},
+      adv_pageLocal = #{advPagelocal,jdbcType=VARCHAR},
+      adv_click = #{advClick,jdbcType=INTEGER}
+    where adv_id = #{advId,jdbcType=INTEGER}
+  </update>
+</mapper>

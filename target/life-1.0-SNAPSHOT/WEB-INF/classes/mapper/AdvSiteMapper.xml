@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.life.dao.AdvSiteMapper">
+  <resultMap id="BaseResultMap" type="com.school.life.bean.AdvSite">
+    <id column="adv_siteId" jdbcType="INTEGER" property="advSiteid" />
+    <result column="adv_site" jdbcType="VARCHAR" property="advSite" />
+    <result column="avd_pageSite" jdbcType="VARCHAR" property="avdPagesite" />
+    <result column="adv_siteStatus" jdbcType="INTEGER" property="advSitestatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    adv_siteId, adv_site, avd_pageSite, adv_siteStatus
+  </sql>
+  <select id="selectByExample" parameterType="com.school.life.bean.AdvSiteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_advsite
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_advsite
+    where adv_siteId = #{advSiteid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_advsite
+    where adv_siteId = #{advSiteid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.school.life.bean.AdvSiteExample">
+    delete from t_advsite
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.school.life.bean.AdvSite">
+    insert into t_advsite (adv_siteId, adv_site, avd_pageSite, 
+      adv_siteStatus)
+    values (#{advSiteid,jdbcType=INTEGER}, #{advSite,jdbcType=VARCHAR}, #{avdPagesite,jdbcType=VARCHAR}, 
+      #{advSitestatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.school.life.bean.AdvSite">
+    insert into t_advsite
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="advSiteid != null">
+        adv_siteId,
+      </if>
+      <if test="advSite != null">
+        adv_site,
+      </if>
+      <if test="avdPagesite != null">
+        avd_pageSite,
+      </if>
+      <if test="advSitestatus != null">
+        adv_siteStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="advSiteid != null">
+        #{advSiteid,jdbcType=INTEGER},
+      </if>
+      <if test="advSite != null">
+        #{advSite,jdbcType=VARCHAR},
+      </if>
+      <if test="avdPagesite != null">
+        #{avdPagesite,jdbcType=VARCHAR},
+      </if>
+      <if test="advSitestatus != null">
+        #{advSitestatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.school.life.bean.AdvSiteExample" resultType="java.lang.Long">
+    select count(*) from t_advsite
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByAdvSiteAndAvdPageSite" resultMap="BaseResultMap">
+    select * from t_advsite where adv_site = #{advSite,jdbcType=VARCHAR} and avd_pageSite = #{avdPagesite,jdbcType=VARCHAR}
+
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_advsite
+    <set>
+      <if test="record.advSiteid != null">
+        adv_siteId = #{record.advSiteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.advSite != null">
+        adv_site = #{record.advSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avdPagesite != null">
+        avd_pageSite = #{record.avdPagesite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advSitestatus != null">
+        adv_siteStatus = #{record.advSitestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_advsite
+    set adv_siteId = #{record.advSiteid,jdbcType=INTEGER},
+      adv_site = #{record.advSite,jdbcType=VARCHAR},
+      avd_pageSite = #{record.avdPagesite,jdbcType=VARCHAR},
+      adv_siteStatus = #{record.advSitestatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.school.life.bean.AdvSite">
+    update t_advsite
+    <set>
+      <if test="advSite != null">
+        adv_site = #{advSite,jdbcType=VARCHAR},
+      </if>
+      <if test="avdPagesite != null">
+        avd_pageSite = #{avdPagesite,jdbcType=VARCHAR},
+      </if>
+      <if test="advSitestatus != null">
+        adv_siteStatus = #{advSitestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where adv_siteId = #{advSiteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.school.life.bean.AdvSite">
+    update t_advsite
+    set adv_site = #{advSite,jdbcType=VARCHAR},
+      avd_pageSite = #{avdPagesite,jdbcType=VARCHAR},
+      adv_siteStatus = #{advSitestatus,jdbcType=INTEGER}
+    where adv_siteId = #{advSiteid,jdbcType=INTEGER}
+  </update>
+</mapper>

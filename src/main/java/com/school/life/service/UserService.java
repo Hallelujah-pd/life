@@ -17,4 +17,7 @@ public interface UserService {
 
     User findUserById(Integer userId);
 
+    int sign(User user);
+
+    int updateUser(User user);
 }

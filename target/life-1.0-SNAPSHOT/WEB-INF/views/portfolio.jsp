@@ -25,23 +25,16 @@
         <!-- Navigation End -->
         <div class="clear"></div>
         <!-- Bread Crumb Start -->
-        <div class="breadcrumb">
-        	<ul>
-            	<li><a href="#">Home</a></li>
-                <li><a href="#">Latest Blogs</a></li>
-                <li><a href="#">June 2012</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
+
         <!-- Bread Crumb End -->
         <!-- Page Heading Section Start -->
         <div class="pageheading">
         	<div class="textsec">
-                <h1 class="colr">Image Gallery</h1>
+                <h1 class="colr">相册照片</h1>
             </div>
             <div class="social">
             	<ul>
-                	<li><h2 class="colr">Join Us</h2></li>
+                	<li><h2 class="colr">加入我们</h2></li>
                     <li><a href="#" class="tweet-icon">&nbsp;</a></li>
                     <li><a href="#" class="fb-icon">&nbsp;</a></li>
                     <li><a href="#" class="vimeo-icon">&nbsp;</a></li>
@@ -60,21 +53,7 @@
 	<div class="inner">
         <!-- Full Width Section Start -->
         <div class="fullwidth overflow">
-        	<!-- Gallery Filter Buttons Start -->
-            <div class="gallery-filter">
-            	<p class="total-pics">234 Images and 55 Videos</p>
-                <div class="right">
-                	<div class="filter">
-                    	<ul id="filterOptions">
-                        	<li class="active"><a href="#" class="all"><span>&nbsp;</span>View All</a></li>
-                            <li><a href="#" class="videos"><span>&nbsp;</span>Videos</a></li>
-                            <li><a href="#" class="images"><span>&nbsp;</span>Images</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Gallery Filter Buttons End -->
-            <!-- Gallery Grid Start -->
+
             <ul class="gallery-grid ourHolder">
 
                 <c:forEach var="page" items="${photoPageInfo.list}">
@@ -133,38 +112,11 @@
 </div>
 <!-- Content Section End -->
 <!-- Scroller Section Start -->
-<div id="scroller-sec">
-	<div class="inner">
-    	<div class="scroll-sec">
-        	<a id="logoPrevious">Previous</a>
-            <div id="logoscroll" class="scroller">
-            	<ul>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                </ul>
-            </div>
-            <a id="logoNext">Next</a>
-        </div>
-        <div class="clear"></div>
-    </div>
-</div>
+
 <!-- Scroller Section End -->
 <!-- Footer Start -->
 <%@include file="footer.jsp"%>
 
 <!-- Footer End -->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

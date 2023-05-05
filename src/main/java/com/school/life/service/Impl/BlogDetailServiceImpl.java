@@ -23,4 +23,5 @@ public class BlogDetailServiceImpl implements BlogDetailService {
     public Article getBlogDetail(Integer articleId) {
         return articleMapper.selectByPrimaryKeyWithUser(articleId);
     }
+
 }

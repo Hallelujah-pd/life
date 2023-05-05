@@ -7,7 +7,44 @@
     <%@include file="head.jsp"%>
 
 </head>
+<script type="text/javascript">
+    function sign(){
+        var username = $.trim($("#signUsername").val());
+        var password = $.trim($("#signPassword").val());
+        var realName = $.trim($("#inputRealName").val());
+        var relation = $.trim($("#inputRelation").val());
+        var email = $.trim($("#inputEmail").val());
+        var reason = $.trim($("#inputReason").val());
 
+        if(username === ""){
+            alert("请输入用户名");
+            return false;
+        }else if(password === ""){
+            alert("请输入密码");
+            return false;
+        }
+        //ajax去服务器端校验
+        var data= {username:username,password:password,realName:realName,relation:relation,email:email,reason:reason};
+
+        $.ajax({
+            type:"POST",
+            url:'${pageContext.request.contextPath}/sign/signUp',
+            data:data,
+            dataType:'json',
+            success:function(data){
+                //alert(msg);
+                if(data==null){
+                    alert("注册失败！")
+                }
+                else{
+                    alert("注册成功")
+                    location.href='${pageContext.request.contextPath}/'
+
+                }
+            }
+        });
+    }
+</script>
 
 <body>
 <!-- Top Bar Start -->
@@ -67,16 +104,18 @@
                     <div class="events-list">
                     	<!-- Event Tabs Section Start -->
                         <div class="events-tabs">
-                            <form action="">
-                                用户名：&ensp;&ensp;<input type="text" id="username"/><br/><br/>
-                                密码：&ensp;&ensp;&ensp;&ensp;<input type="password" id="password"/><br/><br/>
-                                确定密码：<input type="password"/><br/><br/>
-                                真名：&ensp;&ensp;&ensp;&ensp;<input type="text" id="realName"/><br/><br/>
-                                关系：&ensp;&ensp;&ensp;&ensp;<input type="text" id="relation"/><br/><br/>
-                                电子邮件：<input type="text" id="email"/><br/><br/>
-                                验证码：&ensp;&ensp;<input type="text" id="code"/><br/><br>
-                                <input type="submit" value="提交" /><br/><br/>
-                            </form>
+
+                                用户名：&ensp;&ensp;<input type="text" id="signUsername" name="signUsername"/><br/><br/>
+                                密码：&ensp;&ensp;&ensp;&ensp;<input type="password" id="signPassword" name="signPassword"/><br/><br/>
+<%--                                确定密码：<input type="password"/><br/><br/>--%>
+                                真名：&ensp;&ensp;&ensp;&ensp;<input type="text" id="inputRealName" name="realName"/><br/><br/>
+                                关系：&ensp;&ensp;&ensp;&ensp;<input type="text" id="inputRelation" name="relation"/><br/><br/>
+                                原因：&ensp;&ensp;&ensp;&ensp;<input type="text" id="inputReason" name="reason"/><br/><br/>
+                                电子邮件：<input type="text" id="inputEmail" name="email"/><br/><br/>
+<%--                                验证码：&ensp;&ensp;<input type="text" id="code" name="code"/><br/><br>--%>
+
+                            <button  onclick="sign()" class="backcolr dark">提交</button>
+
 
                         </div>
                         <!-- Event Tabs Section End -->
@@ -138,39 +177,11 @@
 </div>
 <!-- Content Section End -->
 <!-- Scroller Section Start -->
-<div id="scroller-sec">
-	<div class="inner">
-    	<div class="scroll-sec">
-        	<a id="logoPrevious">Previous</a>
-            <div id="logoscroll" class="scroller">
-            	<ul>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                </ul>
-                </ul>
-            </div>
-            <a id="logoNext">Next</a>
-        </div>
-        <div class="clear"></div>
-    </div>
-</div>
+
 <!-- Scroller Section End -->
 <!-- Footer Start -->
 <%@include file="footer.jsp"%>
 
 <!-- Footer End -->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

@@ -195,6 +195,11 @@
       select *  FROM t_photo p
                        left join user u on p.`user_id`=u.`user_id` order by p.`photo_time` DESC
     </select>
+    <select id="selectOrderByTimeByUserId" resultMap="BaseResultMap">
+      select *  FROM t_photo
+      where user_id = #{userId,jdbcType=INTEGER}
+      order by photo_time DESC
+    </select>
     <update id="updateByExampleSelective" parameterType="map">
     update t_photo
     <set>

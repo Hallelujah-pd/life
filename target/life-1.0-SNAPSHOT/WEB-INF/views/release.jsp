@@ -11,20 +11,6 @@
 
     <script>
 
-    //简单模式初始化
-    //     var editor;
-    //     KindEditor.ready(function(K) {
-    //         editor = K.create('textarea[name="content"]', {
-    //             resizeType : 1,
-    //             allowPreviewEmoticons : true,
-    //             allowImageUpload : true,
-    //             items : [
-    //                 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-    //                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-    //                 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-    //         });
-    //     });
-
     var editor;
     KindEditor.ready(
         function (K) {
@@ -129,24 +115,16 @@
         <!-- Navigation End -->
         <div class="clear"></div>
         <!-- Bread Crumb Start -->
-        <div class="breadcrumb">
-        	<ul>
-            	<li><a href="#">Home</a></li>
-                <li><a href="#">Latest Blogs</a></li>
-                <li><a href="#">June 2012</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
+
         <!-- Bread Crumb End -->
         <!-- Page Heading Section Start -->
         <div class="pageheading">
         	<div class="textsec">
-                <h1 class="colr">Events</h1>
-                <p class="black">(08 Events)</p>
+                <h1 class="colr">博客发布</h1>
             </div>
             <div class="social">
             	<ul>
-                	<li><h2 class="colr">Join Us</h2></li>
+                	<li><h2 class="colr">加入我们</h2></li>
                     <li><a href="#" class="tweet-icon">&nbsp;</a></li>
                     <li><a href="#" class="fb-icon">&nbsp;</a></li>
                     <li><a href="#" class="vimeo-icon">&nbsp;</a></li>
@@ -176,7 +154,7 @@
                         <div class="events-tabs">
                             <form action="${pageContext.request.contextPath}/release/insertArticle?uId=${sessionScope.user_session.userId}" method="post" id="addForm" >
                                 <br/><br/>
-                                标题:<input type="text" name="title"/>
+                                标题:<input type="text" name="title" style="width: 300px"/>
                                 <br/><br/>
 <%--                                图片：<input type="file" name="photo" id="rimage"/>--%>
                                 <div class="form-group">
@@ -197,7 +175,91 @@
             </div>
             <!-- Two Third Section End -->
             <!-- One Third Section Start -->
-            <%@include file="right_bar.jsp"%>
+            <div class="onethird right">
+                <!-- One Third Box Start -->
+                <div class="onethird box left">
+                    <!-- Recent Posts Widget Start -->
+                    <div class="widget recent-post">
+                        <h3 class="heading colr">最近的帖子</h3>
+                        <p class="black bold">只要地球是自由的。没关系，但现在</p>
+                        <ul>
+                            <c:forEach items="${articleBySortClick}" var="articleBySortClick" end="6">
+                                <li><a href="#">${articleBySortClick.articleTitle}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                    <!-- Recent Posts Widget End -->
+                </div>
+                <!-- One Third Box End -->
+                <!-- One Third Box Start -->
+
+                <!-- One Third Box End -->
+                <!-- One Third Box Start -->
+
+                <!-- One Third Box End -->
+                <!-- One Third Box Start -->
+                <div class="onethird box left">
+                    <!-- Advertisment Widget Start -->
+                    <div class="widget ads-widget">
+                        <c:if test="${empty advSideOne}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/3.jpeg" width="300" height="300"/></a>
+                        </c:if>
+                        <c:if test="${not empty advSideOne}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideOne.advId}">
+                                <img src="${pageContext.request.contextPath}${advSideOne.advImg}" width="300" height="200"/>
+                            </a>
+                            <div class="notification">
+
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideOne.advId}">
+                                            <h4 class="colr">${advSideOne.advHead}</h4>
+                                            <p>${advSideOne.advContent}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:if>
+                    </div>
+
+                    <!-- Advertisment Widget Start -->
+                </div>
+                <!-- One Third Box End -->
+                <!-- One Third Box Start -->
+                <div class="onethird box left">
+                    <!-- Facebook Widget Start -->
+                    <div class="widget facebook-widget">
+                        <c:if test="${empty advSideTwo}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/3.jpeg" width="300" height="300"/></a>
+                        </c:if>
+                        <c:if test="${not empty advSideTwo}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideTwo.advId}">
+                                <img src="${pageContext.request.contextPath}${advSideTwo.advImg}" width="300" height="200"/>
+                            </a>
+
+                            <div class="notification">
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideTwo.advId}">
+
+                                            <h4 class="colr">${advSideTwo.advHead}</h4>
+                                            <p>${advSideTwo.advContent}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:if>
+                    </div>
+
+
+                    <!-- Facebook Widget Start -->
+                </div>
+                <!-- One Third Box End -->
+            </div>
 
             <!-- One Third Section End -->
             <div class="clear"></div>
@@ -205,41 +267,44 @@
         <!-- Full Width Section Start -->
     </div>
 </div>
-<!-- Content Section End -->
-<!-- Scroller Section Start -->
 <div id="scroller-sec">
-	<div class="inner">
-    	<div class="scroll-sec">
-        	<a id="logoPrevious">Previous</a>
+    <div class="inner">
+        <div class="scroll-sec">
             <div id="logoscroll" class="scroller">
-            	<ul>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                </ul>
+                <ul>
+                    <div class="widget facebook-widget">
+                        <c:if test="${empty advEnd}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/4.jpeg" width="1000" height="150"/></a>
+                        </c:if>
+                        <c:if test="${not empty advEnd}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advEnd.advId}">
+
+                            <img src="${pageContext.request.contextPath}${advEnd.advImg}" width="1000" height="100"/></a>
+                            <div class="notification">
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <h4 class="colr">${advEnd.advHead}</h4>
+                                        <p>${advEnd.advContent}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
+                    </div>
+
                 </ul>
             </div>
-            <a id="logoNext">Next</a>
         </div>
         <div class="clear"></div>
     </div>
 </div>
+<!-- Content Section End -->
+<!-- Scroller Section Start -->
+
 <!-- Scroller Section End -->
 <!-- Footer Start -->
 <%@include file="footer.jsp"%>
 
 <!-- Footer End -->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

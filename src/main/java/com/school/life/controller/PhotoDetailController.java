@@ -21,8 +21,9 @@ import java.util.List;
 public class PhotoDetailController {
     @Autowired
     private PhotoDetailService photoDetailService;
+
     @RequestMapping("getPhotoDetail")
-    public String getEvents(Model model){
+    public String getPhotoDetail(Model model){
 
         List<Photo> sortTimePhotos = photoDetailService.getSortTimePhotos();
         model.addAttribute("sortTimePhotos",sortTimePhotos);

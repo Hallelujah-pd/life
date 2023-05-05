@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface BlogDetailService {
     Article getBlogDetail(Integer articleId);
+
 }

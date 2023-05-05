@@ -29,4 +29,10 @@ public class BlogServiceImpl implements BlogService {
     public List<Article> getArticleBySortTime() {
         return articleMapper.selectByExampleWithUserOrderByTime();
     }
+
+    @Override
+    public List<Article> getArticleByUserId(Integer userId) {
+
+        return articleMapper.selectByUserIdByOrderTime(userId);
+    }
 }

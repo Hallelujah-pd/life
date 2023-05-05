@@ -26,6 +26,8 @@ public interface ArticleMapper {
 
     Article selectByPrimaryKey(Integer articleId);
 
+    List<Article> selectByUserIdByOrderTime(Integer userId);
+
     Article selectByPrimaryKeyWithUser(Integer articleId);
 
     int updateByExampleSelective(@Param("record") Article record, @Param("example") ArticleExample example);

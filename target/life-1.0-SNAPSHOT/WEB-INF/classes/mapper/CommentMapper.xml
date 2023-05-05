@@ -9,6 +9,31 @@
     <result column="article_id" jdbcType="INTEGER" property="articleId" />
     <result column="reply_id" jdbcType="INTEGER" property="replyId" />
   </resultMap>
+  <resultMap id="WithUserResultMap" type="com.school.life.bean.Comment">
+    <id column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="reply_id" jdbcType="INTEGER" property="replyId" />
+
+    <association property="user" javaType="com.school.life.bean.User">
+      <id column="user_id" property="userId"/>
+      <result column="real_name" property="realName"/>
+      <result column="self_introduction" property="selfIntroduction"/>
+      <result column="head_img" property="headImg"/>
+      <result column="username" property="username"/>
+      <result column="relation" property="relation"/>
+      <result column="reason" property="reason"/>
+      <result column="email" property="email"/>
+      <result column="user_password" property="userPassword"/>
+    </association>
+  </resultMap>
+  <sql id="WithUser_Column_List">
+    u.user_id, u.real_name, u.self_introduction, u.head_img, u.username, u.relation, u.reason, u.email, u.user_password,
+    c.comment_id,c.comment_time,c.comment_content,c.article_id,c.reply_id,c.user_id
+  </sql>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -156,6 +181,40 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+  <select id="selectByExampleWithUser" resultMap="WithUserResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="WithUser_Column_List" />
+    FROM comment c
+    left join user u on c.`user_id`=u.`user_id`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectOrderByTimeAndUser" resultMap="WithUserResultMap">
+    select *  FROM comment c
+                     left join user u on c.`user_id`=u.`user_id` order by c.`comment_time` DESC
+  </select>
+  <select id="selectByExampleWithUserByArticleId" resultMap="WithUserResultMap">
+    select *
+    from comment
+    where article_id = #{articleId,jdbcType=INTEGER};
+  </select>
+  <select id="selectByExampleWithUserByArticleIdAndReplyId" resultMap="WithUserResultMap">
+    SELECT
+      *
+    FROM
+      `comment` AS c
+        LEFT JOIN `comment` AS r ON r.reply_id = c.comment_id
+        LEFT JOIN `user` AS u ON c.user_id = u.user_id
+    WHERE
+      c.article_id = #{articleId,jdbcType=INTEGER};
   </select>
   <update id="updateByExampleSelective" parameterType="map">
     update comment

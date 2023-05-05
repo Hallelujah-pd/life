@@ -18,6 +18,8 @@ public interface AdminMapper {
 
     List<Admin> selectByExample(AdminExample example);
 
+    Admin selectByAdminNameAndAdminPassword(@Param("adminName") String adminName,@Param("adminPassword") String adminPassword);
+
     Admin selectByPrimaryKey(Integer adminId);
 
     int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);

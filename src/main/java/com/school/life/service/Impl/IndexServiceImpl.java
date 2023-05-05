@@ -1,8 +1,8 @@
 package com.school.life.service.Impl;
 
-import com.school.life.bean.Article;
-import com.school.life.bean.ArticleExample;
-import com.school.life.bean.Photo;
+import com.school.life.bean.*;
+import com.school.life.dao.AdvMapper;
+import com.school.life.dao.AdvSiteMapper;
 import com.school.life.dao.ArticleMapper;
 import com.school.life.dao.PhotoMapper;
 import com.school.life.service.IndexService;
@@ -33,6 +33,11 @@ public class IndexServiceImpl implements IndexService {
 
     private Photo photo;
 
+    @Autowired
+    private AdvMapper advMapper;
+
+
+
     @Override
     public List<Article> getAllArticle() {
         return articleMapper.selectByExample(null);
@@ -43,7 +48,7 @@ public class IndexServiceImpl implements IndexService {
 
         while(article==null){
             Random random = new Random();
-            int randomNum = random.nextInt(1000);
+            int randomNum = random.nextInt(300);
             article = articleMapper.selectByPrimaryKey(randomNum);
         }
 
@@ -65,9 +70,12 @@ public class IndexServiceImpl implements IndexService {
             return 1;
         });
 
-        return articles.subList(0, 4);
+        return articles.subList(0, 5);
 
     }
+
+
+
 
     @Override
     public List<Photo> getAllPhoto() {
@@ -94,5 +102,6 @@ public class IndexServiceImpl implements IndexService {
 
         return photos.subList(0, 3);
     }
+
 
 }

@@ -14,4 +14,8 @@ import java.util.List;
 public interface PhotoService {
     List<Photo> getSortTimePhotos();
 
+    List<Photo> getSortTimePhotosByUserId(Integer userId);
+
+
+
 }

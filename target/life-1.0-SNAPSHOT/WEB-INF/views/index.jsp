@@ -3,6 +3,15 @@
 <head>
     <%@include file="head.jsp"%>
 </head>
+
+<style>
+    .articleClass{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+</style>
 <!-- Top Bar Start -->
 <%@include file="topbar.jsp"%>
 <!-- Top Bar End -->
@@ -15,62 +24,8 @@
         <!-- Navigation End -->
         <div class="clear"></div>
         <!-- Banner Section Start -->
-        <div class="banner-sec">
-        	<!-- Banner Start -->
-            <div class="banner">
-                <div class="slider-wrapper theme-default">
-                    <div id="slider" class="nivoSlider">
-                        <a href="#"><img src="${pageContext.request.contextPath}${article.articleImg}" title="#banner1" alt=""/></a>
-                        <a href="#"><img src="${pageContext.request.contextPath}${article2.articleImg}" title="#banner2" alt="" width="300px" height="180px"/></a>
-                        <a href="#"><img src="${pageContext.request.contextPath}${article3.articleImg}" title="#banner3" alt="" width="300" height="180"/></a>
-                        <a href="#"><img src="${pageContext.request.contextPath}${article4.articleImg}" title="#banner4" alt="" width="300" height="180"/></a>
-                    </div>
-                    <!-- Banner Caption Start -->
-                    <div id="banner1" class="nivo-html-caption">
-                        <h4 class="white">${article.articleTitle}</h4>
-                        <p>${article.articleContent}</p>
-                    </div>
-                    <!-- Banner Caption End -->
-                    <!-- Banner Caption Start -->
-                    <div id="banner2" class="nivo-html-caption">
-                        <h4 class="white">${article2.articleTitle}</h4>
-                        <p>${article2.articleContent}</p>
-                    </div>
-                    <!-- Banner Caption End -->
-                    <!-- Banner Caption Start -->
-                    <div id="banner3" class="nivo-html-caption">
-                        <h4 class="white">${article3.articleTitle}</h4>
-                        <p>${article3.articleContent}</p>
-                    </div>
-                    <!-- Banner Caption End -->
-                    <!-- Banner Caption Start -->
-                    <div id="banner4" class="nivo-html-caption">
-                        <h4 class="white">${article4.articleTitle}</h4>
-                        <p>${article4.articleContent}</p>
-                    </div>
-                    <!-- Banner Caption End -->
-                </div>
-            </div>
-            <!-- Banner End -->
-            <!-- Welcome Section Start -->
-            <div class="welcome">
-            	<h4 class="sec-head backcolr">欢迎加入</h4>
-                <div class="welc-text">
-                	<a href="#"><img src="${pageContext.request.contextPath}/static/images/welcome.jpg" alt="" /></a>
-                    <p>
-                    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo dolor at sapien luctus non venenatis dui lacinia. Phasellus viverra, orci ut lacinia varius.  Phasellus viverra, orci ut lacinia varius.
-                    </p>
-                    <ul class="actions">
-                    	<li><a href="#" class="txthover"><span class="join">&nbsp;</span>Join Us</a></li>
-                        <li><a href="#" class="txthover"><span class="sermons">&nbsp;</span>Sermons</a></li>
-                        <li><a href="#" class="txthover"><span class="support">&nbsp;</span>Support</a></li>
-                    </ul>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <!-- Welcome Section End -->
-            <div class="clear"></div>
-        </div>
+
+        <img src="${pageContext.request.contextPath}${randomArticle2.articleImg}" height="335" width="995" style="border: gainsboro solid 5px">
         <!-- Banner Section End -->
         <div class="clear"></div>
     </div>
@@ -80,20 +35,27 @@
 <div id="contentsec">
 	<div class="inner">
     	<!-- Notification Start -->
-    	<div class="notification">
-        	<h4 class="badge">Notifications</h4>
-            <div class="notif-data">
-            	<div class="desc">
-                	<h4 class="colr">Latest Sormens</h4>
-                    <p>Churchill High Shool Baccalaureate, June 6, 6:00 PM</p>
-                </div>
-                <div class="buttons">
-                	<a href="#" class="txthover"><span class="listen">&nbsp;</span>Listen</a>
-                    <a href="#" class="txthover"><span class="download">&nbsp;</span>Download</a>
-                </div>
-            </div>
-            <a href="#" class="closeit">&nbsp;</a>
+
+        <div class="widget facebook-widget">
+            <c:if test="${empty advTop}">
+                <a href="#"><img src="${pageContext.request.contextPath}/static/img/4.jpeg" width="1000" height="150"/></a>
+            </c:if>
+            <c:if test="${not empty advTop}">
+                <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advTop.advId}">
+                    <img src="${pageContext.request.contextPath}${advTop.advImg}" width="1000" height="100"/>
+                    <div class="notification">
+                        <h5 class="badge">广告</h5>
+                        <div class="notif-data">
+                            <div class="desc">
+                                <h4 class="colr">${advTop.advHead}</h4>
+                                <p>${advTop.advContent}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </c:if>
         </div>
+
         <!-- Notification End -->
         <!-- Advertisment Banners Section Start -->
         <div class="advert-banners">
@@ -121,12 +83,12 @@
                         <h3 class="heading colr">关于我们</h3>
                         <!-- Home Page Post Start -->
                         <div class="home-post">
-                            <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${randomArticle3.articleImg}" alt="" width="300" height="180"/></a>
+                            <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${randomArticle2.articleImg}" alt="" width="300" height="180"/></a>
                             <h4>
-                                <a href="#">${randomArticle3.articleTitle}</a>
+                                <a href="#">${randomArticle2.articleTitle}</a>
                             </h4>
-                            <p>
-                                ${randomArticle3.articleContent}
+                            <p class="articleClass">
+                                ${randomArticle2.articleContent}
                             </p>
                             <a href="#" class="readmore">查看更多</a>
                         </div>
@@ -137,22 +99,16 @@
                     <div class="halfbox right">
                         <h3 class="heading colr">每时一看</h3>
                         <!-- Home Page Post Start -->
-                        <div class="home-post">
-                            <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${randomArticle.articleImg}" alt="" width="300" height="110" /></a>
-                            <h4><a href="#">${randomArticle.articleTitle}</a></h4>
-                            <p>${randomArticle.articleContent}</p>
-                            <a href="#" class="readmore">查看更多</a>
-                        </div>
+                        <c:forEach items="${articleBySortClick}" var="articleBySortClick" end="1">
+                            <div class="home-post">
+                                <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${articleBySortClick.articleImg}" alt="" width="300" height="110" /></a>
+                                <h4><a href="#">${articleBySortClick.articleTitle}</a></h4>
+                                <p class="articleClass">${articleBySortClick.articleContent}</p>
+                                <a href="#" class="readmore">查看更多</a>
+                            </div>
+                        </c:forEach>
                         <!-- Home Page Post End -->
                         <!-- Home Page Post Start -->
-                        <div class="home-post">
-                            <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${randomArticle2.articleImg}" alt="" width="300" height="110"/></a>
-                            <h4><a href="#">${randomArticle2.articleTitle}</a></h4>
-                            <p>
-                                ${randomArticle2.articleContent}
-                            </p>
-                            <a href="#" class="readmore">查看更多</a>
-                        </div>
                         <!-- Home Page Post End -->
                     </div>
                     <!-- Half Box End -->
@@ -261,8 +217,28 @@
                 <!-- One Third Box Start -->
                 <div class="onethird box left">
                 	<!-- Facebook Widget Start -->
-            		<div class="widget ads-widget">
-                    	<a href="#"><img src="${pageContext.request.contextPath}/static/images/adv1.jpg" alt="" /></a>
+                    <div class="widget ads-widget">
+                        <c:if test="${empty advSideOne}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/3.jpeg" width="300" height="300"/></a>
+                        </c:if>
+                        <c:if test="${not empty advSideOne}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideOne.advId}">
+                            <img src="${pageContext.request.contextPath}${advSideOne.advImg}" width="300" height="200"/>
+                            </a>
+                            <div class="notification">
+
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideOne.advId}">
+                                        <h4 class="colr">${advSideOne.advHead}</h4>
+                                        <p>${advSideOne.advContent}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:if>
                     </div>
                     <!-- Facebook Widget Start -->
             	</div>
@@ -270,8 +246,29 @@
                 <!-- One Third Box Start -->
                 <div class="onethird box left">
                 	<!-- Facebook Widget Start -->
-            		<div class="widget facebook-widget">
-                    	<a href="#"><img src="${pageContext.request.contextPath}/static/images/facebook.jpg" alt="" /></a>
+                    <div class="widget facebook-widget">
+                        <c:if test="${empty advSideTwo}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/3.jpeg" width="300" height="300"/></a>
+                        </c:if>
+                        <c:if test="${not empty advSideTwo}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideTwo.advId}">
+                            <img src="${pageContext.request.contextPath}${advSideTwo.advImg}" width="300" height="200"/>
+                            </a>
+
+                            <div class="notification">
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advTop.advId}">
+
+                                        <h4 class="colr">${advSideTwo.advHead}</h4>
+                                        <p>${advSideTwo.advContent}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:if>
                     </div>
                     <!-- Facebook Widget Start -->
             	</div>
@@ -283,39 +280,43 @@
         <!-- Full Width Section Start -->
     </div>
 </div>
-<!-- Content Section End -->
-<!-- Scroller Section Start -->
 <div id="scroller-sec">
-	<div class="inner">
-    	<div class="scroll-sec">
-        	<a id="logoPrevious">Previous</a>
+    <div class="inner">
+        <div class="scroll-sec">
             <div id="logoscroll" class="scroller">
-            	<ul>
-                	<li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
+                <ul>
+                    <div class="widget facebook-widget">
+                        <c:if test="${empty advEnd}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/4.jpeg" width="1000" height="150"/></a>
+                        </c:if>
+                        <c:if test="${not empty advEnd}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advEnd.advId}">
+
+                            <img src="${pageContext.request.contextPath}${advEnd.advImg}" width="1000" height="100"/>
+                            <div class="notification">
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <h4 class="colr">${advEnd.advHead}</h4>
+                                        <p>${advEnd.advContent}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </c:if>
+                    </div>
                 </ul>
             </div>
-            <a id="logoNext">Next</a>
         </div>
         <div class="clear"></div>
     </div>
 </div>
+<!-- Content Section End -->
+<!-- Scroller Section Start -->
+
 <!-- Scroller Section End -->
 <!-- Footer Start -->
 <%@include file="footer.jsp"%>
 <!-- Footer End -->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

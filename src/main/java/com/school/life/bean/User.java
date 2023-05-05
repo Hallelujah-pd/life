@@ -1,6 +1,8 @@
 package com.school.life.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     @Override
     public String toString() {

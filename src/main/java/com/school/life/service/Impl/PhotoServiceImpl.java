@@ -23,4 +23,10 @@ public class PhotoServiceImpl implements PhotoService {
     public List<Photo> getSortTimePhotos() {
         return photoMapper.selectByExampleWithUserOrderByTime();
     }
+
+    @Override
+    public List<Photo> getSortTimePhotosByUserId(Integer userId) {
+
+        return photoMapper.selectOrderByTimeByUserId(userId);
+    }
 }

@@ -134,7 +134,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectByAdminNameAndAdminPassword" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List" />
+      from t_admin where admin_name = #{adminName,jdbcType=VARCHAR} and admin_password = #{adminPassword,jdbcType=VARCHAR};
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update t_admin
     <set>
       <if test="record.adminId != null">

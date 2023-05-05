@@ -24,23 +24,16 @@
         <!-- Navigation End -->
         <div class="clear"></div>
         <!-- Bread Crumb Start -->
-        <div class="breadcrumb">
-        	<ul>
-            	<li><a href="#">Home</a></li>
-                <li><a href="#">Latest Blogs</a></li>
-                <li><a href="#">June 2012</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
+
         <!-- Bread Crumb End -->
         <!-- Page Heading Section Start -->
         <div class="pageheading">
         	<div class="textsec">
-                <h1 class="colr">Image Gallery - Slide Show</h1>
+                <h1 class="colr">图片详情</h1>
             </div>
             <div class="social">
             	<ul>
-                	<li><h2 class="colr">Join Us</h2></li>
+                	<li><h2 class="colr">加入我们</h2></li>
                     <li><a href="#" class="tweet-icon">&nbsp;</a></li>
                     <li><a href="#" class="fb-icon">&nbsp;</a></li>
                     <li><a href="#" class="vimeo-icon">&nbsp;</a></li>
@@ -96,38 +89,11 @@
 </div>
 <!-- Content Section End -->
 <!-- Scroller Section Start -->
-<div id="scroller-sec">
-	<div class="inner">
-    	<div class="scroll-sec">
-        	<a id="logoPrevious">Previous</a>
-            <div id="logoscroll" class="scroller">
-            	<ul>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                </ul>
-            </div>
-            <a id="logoNext">Next</a>
-        </div>
-        <div class="clear"></div>
-    </div>
-</div>
+
 <!-- Scroller Section End -->
 <!-- Footer Start -->
 <%@include file="footer.jsp"%>
 
 <!-- Footer End -->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

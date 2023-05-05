@@ -1,12 +1,11 @@
 package com.school.life.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.school.life.bean.Article;
-import com.school.life.bean.Msg;
-import com.school.life.bean.Photo;
-import com.school.life.bean.User;
+import com.school.life.bean.*;
+import com.school.life.dao.AdvMapper;
 import com.school.life.dao.ArticleMapper;
 import com.school.life.dao.UserMapper;
+
 import com.school.life.service.IndexService;
 import com.school.life.service.ReleaseService;
 import com.school.life.service.UserService;
@@ -45,6 +44,8 @@ public class ReleaseController {
 
     @Autowired
             private IndexService indexService;
+    @Autowired
+            private AdvMapper advMapper;
 
     String insertPath;
 
@@ -55,11 +56,19 @@ public class ReleaseController {
 
         model.addAttribute("blogPhoto",blogPhoto);
         model.addAttribute("articleBySortClick",articleBySortClick);
+
+        Adv advEnd = advMapper.selectByAdvLocalAndAdvPageLocal("博客发布", "底部");
+        Adv advSideOne = advMapper.selectByAdvLocalAndAdvPageLocal("博客发布", "侧边1");
+        Adv advSideTwo = advMapper.selectByAdvLocalAndAdvPageLocal("博客发布", "侧边2");
+
+        model.addAttribute("advEnd",advEnd);
+        model.addAttribute("advSideOne",advSideOne);
+        model.addAttribute("advSideTwo",advSideTwo);
         return "release";
     }
 
     @RequestMapping(value = "/insertArticle", method = RequestMethod.POST)
-    public String insertArticle(HttpSession session, @Param("title") String title,
+    public String insertArticle(@Param("title") String title,
                                 @Param("content") String content, @Param("uId") Integer uId) throws IOException {
 
         Date date = new Date(new java.util.Date().getTime());

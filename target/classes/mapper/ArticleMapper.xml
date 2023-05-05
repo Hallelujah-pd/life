@@ -219,7 +219,12 @@
       left join user u on a.`user_id`=u.`user_id`
       where article_id = #{articleId,jdbcType=INTEGER}
     </select>
-    <update id="updateByExampleSelective" parameterType="map">
+  <select id="selectByUserIdByOrderTime" resultMap="BaseResultMap">
+    select *  FROM article
+    where user_id = #{userId,jdbcType=INTEGER}
+    order by article_time DESC
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
     update article
     <set>
       <if test="record.articleId != null">

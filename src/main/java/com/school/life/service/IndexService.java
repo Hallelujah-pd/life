@@ -1,5 +1,6 @@
 package com.school.life.service;
 
+import com.school.life.bean.Adv;
 import com.school.life.bean.Article;
 import com.school.life.bean.ArticleExample;
 //import com.school.life.bean.Photo;
@@ -28,6 +29,8 @@ public interface IndexService {
     List<Photo> getAllPhoto();
 
     List<Photo> getPhotoBySortClick();
+
+
 
 
 

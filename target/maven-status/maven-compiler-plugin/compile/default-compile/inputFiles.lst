@@ -1,10 +1,13 @@
 D:\javaWeb源代码\life\src\main\java\com\school\life\service\BlogService.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\service\Impl\UserServiceImpl.java
+D:\javaWeb源代码\life\src\main\java\com\school\life\controller\backController\BackLogin.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\service\PhotoService.java
+D:\javaWeb源代码\life\src\main\java\com\school\life\controller\backController\BackIndex.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\dao\CommentMapper.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\dao\ArticleMapper.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\controller\ReleaseController.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\service\PageService.java
+D:\javaWeb源代码\life\src\main\java\com\school\life\controller\backController\BackAdv.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\controller\UserController.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\bean\CommentExample.java
 D:\javaWeb源代码\life\src\main\java\com\school\life\controller\PhotoDetailController.java

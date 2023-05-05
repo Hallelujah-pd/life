@@ -43,7 +43,6 @@
         <ul>
             <li class="current-menu-item"><a href="${pageContext.request.contextPath}/">主页</a></li>
             <li><a href="${pageContext.request.contextPath}/blog/pageList">博客</a></li>
-            <li><a href="${pageContext.request.contextPath}/events/getEvents">活动</a></li>
             <li><a href="${pageContext.request.contextPath}/release/intoRelease">博客发布</a></li>
             <li><a href="#">相册</a>
                 <ul class="backcolr">
@@ -51,11 +50,10 @@
                     <li><a href="${pageContext.request.contextPath}/PhotoDetail/getPhotoDetail">照片详情</a></li>
                 </ul>
             </li>
-            <li><a href="contact.html">关于我们</a></li>
             <li><a href="#">个人中心</a>
                 <ul class="backcolr">
                     <li><a href="${pageContext.request.contextPath}/user/selfInter?userId=${sessionScope.user_session.userId}">个人介绍</a></li>
-                    <li><a href="">资料修改</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/dataMod?userId=${sessionScope.user_session.userId}">资料修改</a></li>
 
                 </ul>
             </li>
@@ -71,7 +69,6 @@
                             <li><a href="../../static/portfolio-slideshow.html">照片详情</a></li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">关于我们</a></li>
                 </ul>
             </li>
         </ul>

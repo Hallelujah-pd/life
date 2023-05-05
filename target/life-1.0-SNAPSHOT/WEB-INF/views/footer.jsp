@@ -9,6 +9,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+
 <div id="footer">
     <div class="inner">
         <!-- Widget PlaceHolder Start -->
@@ -55,4 +57,5 @@
     </div>
     <!-- Copyrights End -->
 </div>
+
 </html>

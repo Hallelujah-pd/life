@@ -1,0 +1,9 @@
+com\school\life\dao\AdminMapperTest.class
+com\school\life\dao\PhotoMapperTest.class
+com\school\life\service\IndexServiceTest.class
+com\school\life\service\BlogDetailServiceTest.class
+com\school\life\dao\UserMapperTest.class
+com\school\life\service\BlogServiceTest.class
+com\school\life\dao\ArticleMapperTest.class
+com\school\life\service\UserServiceTest.class
+com\school\life\service\PageServiceTest.class

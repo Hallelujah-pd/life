@@ -29,4 +29,10 @@ public class PhotoMapperTest {
         List<Photo> photos = photoMapper.selectByExampleWithUserOrderByTime();
         photos.forEach(System.out::println);
     }
+
+    @Test
+    public void selectOrderByTimeByUserId() {
+        List<Photo> photos = photoMapper.selectOrderByTimeByUserId(1);
+        photos.forEach(System.out::println);
+    }
 }

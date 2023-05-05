@@ -20,6 +20,8 @@ public interface PhotoMapper {
 
     List<Photo> selectByExampleWithUserOrderByTime();
 
+    List<Photo> selectOrderByTimeByUserId(Integer userId);
+
     Photo selectByPrimaryKey(Integer photoId);
 
     int updateByExampleSelective(@Param("record") Photo record, @Param("example") PhotoExample example);

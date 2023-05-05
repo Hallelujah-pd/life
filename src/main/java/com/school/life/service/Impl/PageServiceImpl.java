@@ -29,8 +29,10 @@ public class PageServiceImpl implements PageService {
     private PhotoMapper photoMapper;
     @Override
     public PageInfo<Article> pageArticle(Integer pageNum) {
+//        每页显示的数据条数
         PageHelper.startPage(pageNum,4);
         List<Article> articles = articleMapper.selectByExampleWithUserOrderByTime();
+//        显示页码数量
         return new PageInfo<>(articles, 5);
     }
 

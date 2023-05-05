@@ -51,6 +51,36 @@
 		<!--控制住数据源  -->
 		<property name="dataSource" ref="pooledDataSource"></property>
 	</bean>
+
+
+	<!--集成redis-->
+	<!--jedis配置-->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="100"/>
+		<property name="minIdle" value="8"/>
+		<property name="maxWaitMillis" value="-1"/>
+		<property name="testOnBorrow" value="false"/>
+	</bean>
+	<!--redis服务器中心-->
+	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="poolConfig" ref="poolConfig"/>
+		<property name="port" value="6379"/>
+		<property name="hostName" value="127.0.0.1"/>
+		<property name="password" value=""/>
+		<property name="timeout" value="-1"/>
+	</bean>
+	<!--redis操作模板  面向对象的模板-->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<!--如果不配置Serializer 那么存储的时候只能使用String ,如果用对象类型存储，那么会提示错误-->
+		<property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+		</property>
+		<property name="valueSerializer">
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+		</property>
+	</bean>
+
 	<!--开启基于注解的事务，使用xml配置形式的事务（必要主要的都是使用配置式）  -->
 	<aop:config>
 		<!-- 切入点表达式 -->
@@ -68,7 +98,7 @@
 			<tx:method name="get*" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
-	
+
 	<!-- Spring配置文件的核心点（数据源、与mybatis的整合，事务控制） -->
 	
 </beans>

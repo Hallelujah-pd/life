@@ -41,4 +41,10 @@ public class ArticleMapperTest {
         Article article = articleMapper.selectByPrimaryKeyWithUser(151);
         System.out.println(article);
     }
+
+    @Test
+    public void selectByUserId() {
+        List<Article> articles = articleMapper.selectByUserIdByOrderTime(1);
+        articles.forEach(System.out::println);
+    }
 }

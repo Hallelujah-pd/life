@@ -16,5 +16,7 @@ public interface BlogService {
 
     List<Article> getArticleBySortTime();
 
+    List<Article> getArticleByUserId(Integer userId);
+
     
 }

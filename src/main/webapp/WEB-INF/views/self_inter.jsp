@@ -25,34 +25,28 @@
 <div id="contentsec">
     <div class="inner">
         <!-- Notification Start -->
-        <div class="notification">
-            <h4 class="badge">Notifications</h4>
-            <div class="notif-data">
-                <div class="desc">
-                    <h4 class="colr">Latest Sormens</h4>
-                    <p>Churchill High Shool Baccalaureate, June 6, 6:00 PM</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="txthover"><span class="listen">&nbsp;</span>Listen</a>
-                    <a href="#" class="txthover"><span class="download">&nbsp;</span>Download</a>
-                </div>
-            </div>
-            <a href="#" class="closeit">&nbsp;</a>
+        <div class="widget facebook-widget">
+            <c:if test="${empty advTop}">
+                <a href="#"><img src="${pageContext.request.contextPath}/static/img/4.jpeg" width="1000" height="150"/></a>
+            </c:if>
+            <c:if test="${not empty advTop}">
+                <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advTop.advId}">
+                    <img src="${pageContext.request.contextPath}${advTop.advImg}" width="1000" height="100"/>
+                    <div class="notification">
+                        <h5 class="badge">广告</h5>
+                        <div class="notif-data">
+                            <div class="desc">
+                                <h4 class="colr">${advTop.advHead}</h4>
+                                <p>${advTop.advContent}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </c:if>
         </div>
         <!-- Notification End -->
         <!-- Advertisment Banners Section Start -->
-        <div class="advert-banners">
-            <ul>
-                <c:forEach var="carouselPhoto" items="${carouselPhoto}" end="2">
-                    <li>
-                        <div class="thumb">
-                            <a href="#"><img src="${pageContext.request.contextPath}${carouselPhoto.photoImg}" alt="" width="300" height="180"/></a>
-                            <h4 class="white">${carouselPhoto.photoTitle}</h4>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
+
         <!-- Advertisment Banners Section End -->
         <div class="clear"></div>
         <!-- Full Width Section Start -->
@@ -63,38 +57,58 @@
                 <div class="twothird left">
                     <!-- Half Box Start -->
                     <div class="halfbox left border-right">
-                        <h3 class="heading colr">头像</h3>
+                        <hr/>
+
                         <!-- Home Page Post Start -->
                         <div class="home-post">
                             <a href="#" class="thumb"><img src="${pageContext.request.contextPath}/${selfInter.headImg}" alt="" width="300" height="180"/></a>
+                            <a href="#" class="readmore">头像</a>
+                            <br/><br/>
+                            <hr/>
                             <h4>
-                                <a href="#">${randomArticle3.articleTitle}</a>
+                                <a href="#"  style="color: brown">${selfInter.selfIntroduction}</a>
                             </h4>
                             <p>
-                                ${randomArticle3.articleContent}
+                                自我介绍
                             </p>
-                            <a href="#" class="readmore">avatar</a>
+
                         </div>
                         <!-- Home Page Post End -->
                     </div>
                     <!-- Half Box End -->
                     <!-- Half Box Start -->
                     <div class="halfbox right">
-                        <h3 class="heading colr">用户名:</h3>
                         <!-- Home Page Post Start -->
+                        <hr/>
+
+
                         <div class="home-post">
-                            <h4><a href="#">${selfInter.username}</a></h4>
-                            <a href="#" class="readmore">username</a>
+                            <h4><a href="#" style="color: brown">${selfInter.username}</a></h4>
+                            <a href="#" class="readmore">用户名</a>
                         </div>
                         <!-- Home Page Post End -->
                         <!-- Home Page Post Start -->
+                        <hr/>
+
                         <div class="home-post">
-                            <h3 class="heading colr">自我介绍:</h3>
-                            <h4><a href="#">${selfInter.selfIntroduction}</a></h4>
-                            <p>
-                                ${randomArticle2.articleContent}
-                            </p>
-                            <a href="#" class="readmore">selfIntroduction</a>
+                            <h4><a href="#" style="color: brown">${selfInter.email}</a></h4>
+                            <a href="#" class="readmore">电子邮箱</a>
+                        </div>
+                        <!-- Home Page Post Start -->
+                        <hr/>
+
+
+                        <div class="home-post">
+                            <h4><a href="#" style="color: brown">${selfInter.relation}</a></h4>
+                            <a href="#" class="readmore">与管理员关系</a>
+                        </div>
+
+                        <hr/>
+
+                        <!-- Home Page Post Start -->
+                        <div class="home-post">
+                            <h4><a href="#" style="color: brown">${selfInter.realName}</a></h4>
+                            <a href="#" class="readmore">真名</a>
                         </div>
                         <!-- Home Page Post End -->
                     </div>
@@ -108,13 +122,15 @@
                         <!-- Video Gallery Start -->
                         <div class="video-gallery">
                             <ul>
-<%--                                <c:forEach items="${selfInter.article}" var="article">--%>
-<%--                                    <li>--%>
-<%--                                        <a href="#" class="thumb"><img src="" alt="" /></a>--%>
-<%--                                        <h4><a href="#"></a></h4>--%>
-<%--                                        <p><a href="#" class="bold">Donec ut nibh tellus. Proin erat urna, luctuseg ementum at, facilisis sed nunc.</a></p>--%>
-<%--                                    </li>--%>
-<%--                                </c:forEach>--%>
+                                <c:forEach items="${articleByUserId}" var="articleByUserId" end="2">
+                                    <li>
+                                        <hr/>
+                                        <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${articleByUserId.articleImg}" width="300" height="146" /></a>
+                                        <h4><a href="#">《${articleByUserId.articleTitle}》</a></h4><br/>
+                                        <p><a href="#" class="bold">${articleByUserId.articleContent}</a></p>
+
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                         <!-- Video Gallery End -->
@@ -124,13 +140,17 @@
                     <div class="halfbox right">
                         <h3 class="heading colr">照片相册</h3>
                         <!-- Home Page Post Start -->
-                        <div class="image-gallery">
+                        <div class="video-gallery">
                             <ul>
-                                <c:forEach items="${allPhoto}" var="allPhoto" end="11">
-                                    <li><a href="#"><img src="${pageContext.request.contextPath}${allPhoto.photoImg}" alt="" width="62" height="61"/></a></li>
+                                <c:forEach items="${sortTimePhotosByUserId}" var="sortTimePhotosByUserId" end="2">
+                                    <li>
+                                        <hr/>
+                                        <a href="#" class="thumb"><img src="${pageContext.request.contextPath}${sortTimePhotosByUserId.photoImg}" width="300" height="146" /></a>
+                                        <h4><a href="#">《${sortTimePhotosByUserId.photoTitle}》</a></h4><br/>
+                                        <p><a href="#" class="bold">${sortTimePhotosByUserId.photoContent}</a></p>
+                                    </li>
                                 </c:forEach>
                             </ul>
-                            <a href="#" class="buttonone backcolr">View Gallery</a>
                         </div>
                         <!-- Home Page Post End -->
                     </div>
@@ -206,8 +226,30 @@
                 <div class="onethird box left">
                     <!-- Facebook Widget Start -->
                     <div class="widget ads-widget">
-                        <a href="#"><img src="${pageContext.request.contextPath}/static/images/adv1.jpg" alt="" /></a>
+                        <c:if test="${empty advSideOne}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/3.jpeg" width="300" height="300"/></a>
+                        </c:if>
+                        <c:if test="${not empty advSideOne}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideOne.advId}">
+                                <img src="${pageContext.request.contextPath}${advSideOne.advImg}" width="300" height="200"/>
+                            </a>
+                            <div class="notification">
+
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideOne.advId}">
+                                            <h4 class="colr">${advSideOne.advHead}</h4>
+                                            <p>${advSideOne.advContent}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:if>
                     </div>
+
+
                     <!-- Facebook Widget Start -->
                 </div>
                 <!-- One Third Box End -->
@@ -215,8 +257,31 @@
                 <div class="onethird box left">
                     <!-- Facebook Widget Start -->
                     <div class="widget facebook-widget">
-                        <a href="#"><img src="${pageContext.request.contextPath}/static/images/facebook.jpg" alt="" /></a>
+                        <c:if test="${empty advSideTwo}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/3.jpeg" width="300" height="300"/></a>
+                        </c:if>
+                        <c:if test="${not empty advSideTwo}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideTwo.advId}">
+                                <img src="${pageContext.request.contextPath}${advSideTwo.advImg}" width="300" height="200"/>
+                            </a>
+
+                            <div class="notification">
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advSideTwo.advId}">
+
+                                            <h4 class="colr">${advSideTwo.advHead}</h4>
+                                            <p>${advSideTwo.advContent}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:if>
                     </div>
+
+
                     <!-- Facebook Widget Start -->
                 </div>
                 <!-- One Third Box End -->
@@ -227,39 +292,44 @@
         <!-- Full Width Section Start -->
     </div>
 </div>
-<!-- Content Section End -->
-<!-- Scroller Section Start -->
 <div id="scroller-sec">
     <div class="inner">
         <div class="scroll-sec">
-            <a id="logoPrevious">Previous</a>
             <div id="logoscroll" class="scroller">
                 <ul>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo3.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo4.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo5.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo1.gif" alt="" /></a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/static/images/logo2.gif" alt="" /></a></li>
+                    <div class="widget facebook-widget">
+                        <c:if test="${empty advEnd}">
+                            <a href="#"><img src="${pageContext.request.contextPath}/static/img/4.jpeg" width="1000" height="150"/></a>
+                        </c:if>
+                        <c:if test="${not empty advEnd}">
+                            <a href="${pageContext.request.contextPath}/Adv/addAdvClick?advId=${advEnd.advId}">
+
+                            <img src="${pageContext.request.contextPath}${advEnd.advImg}" width="1000" height="100"/>
+                            <div class="notification">
+                                <h5 class="badge">广告</h5>
+                                <div class="notif-data">
+                                    <div class="desc">
+                                        <h4 class="colr">${advEnd.advHead}</h4>
+                                        <p>${advEnd.advContent}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </c:if>
+                    </div>
+
                 </ul>
             </div>
-            <a id="logoNext">Next</a>
         </div>
         <div class="clear"></div>
     </div>
 </div>
+<!-- Content Section End -->
+<!-- Scroller Section Start -->
+
 <!-- Scroller Section End -->
 <!-- Footer Start -->
 <%@include file="footer.jsp"%>
 <!-- Footer End -->
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

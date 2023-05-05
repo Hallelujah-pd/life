@@ -1,8 +1,32 @@
 package com.school.life.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Comment {
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "user=" + user +
+                ", commentId=" + commentId +
+                ", commentTime=" + commentTime +
+                ", commentContent='" + commentContent + '\'' +
+                ", userId=" + userId +
+                ", articleId=" + articleId +
+                ", replyId=" + replyId +
+                '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
+
     private Integer commentId;
 
     private Date commentTime;
@@ -14,6 +38,16 @@ public class Comment {
     private Integer articleId;
 
     private Integer replyId;
+
+    private List<Comment> replies;
+
+    public List<Comment> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(List<Comment> replies) {
+        this.replies = replies;
+    }
 
     public Integer getCommentId() {
         return commentId;
